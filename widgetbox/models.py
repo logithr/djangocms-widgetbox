@@ -11,7 +11,7 @@ from filer.fields.image import FilerImageField
 
 
 @python_2_unicode_compatible
-class ButtonPlugin(CMSPlugin):
+class Button(CMSPlugin):
     title = models.CharField(max_length=200)
     subtitle = models.CharField(max_length=200, blank=True)
     link_to_page = PageField(null=True, blank=True)
@@ -26,7 +26,7 @@ class ButtonPlugin(CMSPlugin):
 
 
 @python_2_unicode_compatible
-class QuotePlugin(CMSPlugin):
+class Quote(CMSPlugin):
     content = HTMLField()
     name = models.CharField(max_length=200)
     link = models.CharField(max_length=400, blank=True)
@@ -40,7 +40,7 @@ class QuotePlugin(CMSPlugin):
 
 
 @python_2_unicode_compatible
-class GalleryPlugin(CMSPlugin):
+class Gallery(CMSPlugin):
     style = models.CharField(
         max_length=100,
         choices=GALLERY_STYLES,
@@ -58,7 +58,7 @@ class GalleryPlugin(CMSPlugin):
 
 
 @python_2_unicode_compatible
-class GalleryImagePlugin(CMSPlugin):
+class GalleryImage(CMSPlugin):
     image = FilerImageField()
     title = models.CharField(max_length=100, blank=True)
     description = models.CharField(max_length=200, blank=True)

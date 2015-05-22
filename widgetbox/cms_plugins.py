@@ -2,40 +2,40 @@ from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 
 from .models import (
-    ButtonPlugin, QuotePlugin,
-    GalleryPlugin, GalleryImagePlugin,
+    Button, Quote,
+    Gallery, GalleryImage,
     FaqTopic, Faq
 )
 
 
-class CMSButtonPlugin(CMSPluginBase):
-    model = ButtonPlugin
+class ButtonPlugin(CMSPluginBase):
+    model = Button
     module = "Widget Box"
     name = "Button"
     render_template = "widgetbox/button.html"
 
 
-class CMSQuotePlugin(CMSPluginBase):
-    model = QuotePlugin
+class QuotePlugin(CMSPluginBase):
+    model = Quote
     module = "Widget Box"
     name = "Quote"
     render_template = "widgetbox/quote.html"
 
 
-class CMSGalleryPlugin(CMSPluginBase):
-    model = GalleryPlugin
+class GalleryPlugin(CMSPluginBase):
+    model = Gallery
     module = "Widget Box"
     name = "Gallery"
     allow_children = True
-    child_classes = ["CMSGalleryImagePlugin"]
+    child_classes = ["GalleryImagePlugin"]
     render_template = "widgetbox/gallery.html"
 
 
-class CMSGalleryImagePlugin(CMSPluginBase):
-    model = GalleryImagePlugin
+class GalleryImagePlugin(CMSPluginBase):
+    model = GalleryImage
     module = "Widget Box"
     name = "Gallery Image"
-    parent_classes = ["CMSGalleryPlugin"]
+    parent_classes = ["GalleryPlugin"]
     render_template = "widgetbox/gallery-image.html"
 
 
@@ -66,9 +66,9 @@ class FaqPlugin(CMSPluginBase):
         return instance.style
 
 
-plugin_pool.register_plugin(CMSButtonPlugin)
-plugin_pool.register_plugin(CMSQuotePlugin)
-plugin_pool.register_plugin(CMSGalleryPlugin)
-plugin_pool.register_plugin(CMSGalleryImagePlugin)
+plugin_pool.register_plugin(ButtonPlugin)
+plugin_pool.register_plugin(QuotePlugin)
+plugin_pool.register_plugin(GalleryPlugin)
+plugin_pool.register_plugin(GalleryImagePlugin)
 plugin_pool.register_plugin(FaqTopicPlugin)
 plugin_pool.register_plugin(FaqPlugin)
