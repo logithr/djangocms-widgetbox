@@ -1,7 +1,7 @@
 from django.utils.encoding import python_2_unicode_compatible
 
 from django.db import models
-from .settings import GALLERY_STYLES
+from .settings import GALLERY_STYLES, FAQ_STYLES
 
 from cms.models import CMSPlugin
 from cms.models.fields import PageField
@@ -74,3 +74,30 @@ class GalleryImagePlugin(CMSPlugin):
 
     def get_description(self):
         return self.description or self.image.description
+
+
+@python_2_unicode_compatible
+class FaqTopic(CMSPlugin):
+    topic = models.CharField(max_length=400)
+    style = models.CharField(
+        max_length=100,
+        choices=FAQ_STYLES, default=FAQ_STYLES[0][0]
+    )
+
+    class Meta:
+        db_table = 'widgetbox_faq_topics'
+
+    def __str__(self):
+        return u'FAQ topic ({})'.format(self.style)
+
+
+@python_2_unicode_compatible
+class Faq(CMSPlugin):
+    question = models.CharField(max_length=400)
+    answer = HTMLField()
+
+    class Meta:
+        db_table = 'widgetbox_faqs'
+
+    def __str__(self):
+        return self.question

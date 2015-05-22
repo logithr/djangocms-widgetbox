@@ -6,3 +6,8 @@ GALLERY_STYLES = getattr(
     (('default', 'default'),)
 )
 
+FAQ_STYLES = getattr(
+    settings, 'WIDGETBOX_FAQ_STYLES',
+    (('widgetbox/faq-topic.html', 'Default'),)
+)
+
