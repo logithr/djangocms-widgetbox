@@ -23,7 +23,7 @@ setup(
         'cmsplugin-filer>=0.10',
     ],
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',
         'Framework :: Django',
         'Intended Audience :: Developers',
