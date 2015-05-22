@@ -58,12 +58,6 @@ class FaqPlugin(CMSPluginBase):
 
     def get_render_template(self, context, instance, placeholder):
         return "widgetbox/faq.html"
-        # a = dir(instance)
-        # b = dir(context)
-        c = dir(placeholder)
-        parent = dir(instance.get_parent())
-        assert False
-        return instance.style
 
 
 plugin_pool.register_plugin(ButtonPlugin)
