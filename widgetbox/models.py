@@ -10,8 +10,18 @@ from djangocms_text_ckeditor.fields import HTMLField
 from filer.fields.image import FilerImageField
 
 
+class LinkMixin(object):
+    def get_link(self):
+        if self.link_custom:
+            return self.link_custom
+        elif self.link_to_page:
+            return self.link_to_page.get_absolute_url()
+        else:
+            return ''
+
+
 @python_2_unicode_compatible
-class Button(CMSPlugin):
+class Button(LinkMixin, CMSPlugin):
     title = models.CharField(max_length=200)
     subtitle = models.CharField(max_length=200, blank=True)
     link_to_page = PageField(null=True, blank=True)
@@ -58,10 +68,12 @@ class Gallery(CMSPlugin):
 
 
 @python_2_unicode_compatible
-class GalleryImage(CMSPlugin):
+class GalleryImage(LinkMixin, CMSPlugin):
     image = FilerImageField()
     title = models.CharField(max_length=100, blank=True)
     description = models.CharField(max_length=200, blank=True)
+    link_to_page = PageField(null=True, blank=True)
+    link_custom = models.CharField(max_length=400, blank=True)
 
     class Meta:
         db_table = 'widgetbox_gallery_images'
