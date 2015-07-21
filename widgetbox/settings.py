@@ -10,3 +10,6 @@ FAQ_STYLES = getattr(
     settings, 'WIDGETBOX_FAQ_STYLES',
     (('widgetbox/faq-topic.html', 'default'),)
 )
+
+DIVIDER_SIZES = getattr(
+    settings, 'WIDGETBOX_DIVIDER_SIZES', ())

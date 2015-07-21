@@ -4,7 +4,8 @@ from cms.plugin_pool import plugin_pool
 from .models import (
     Button, Quote,
     Gallery, GalleryImage,
-    FaqTopic, Faq
+    FaqTopic, Faq,
+    Divider
 )
 
 
@@ -60,9 +61,17 @@ class FaqPlugin(CMSPluginBase):
         return "widgetbox/faq.html"
 
 
+class DividerPlugin(CMSPluginBase):
+    model = Divider
+    module = "Widget Box"
+    name = "Vertical divider"
+    render_template = "widgetbox/divider.html"
+
+
 plugin_pool.register_plugin(ButtonPlugin)
 plugin_pool.register_plugin(QuotePlugin)
 plugin_pool.register_plugin(GalleryPlugin)
 plugin_pool.register_plugin(GalleryImagePlugin)
 plugin_pool.register_plugin(FaqTopicPlugin)
 plugin_pool.register_plugin(FaqPlugin)
+plugin_pool.register_plugin(DividerPlugin)

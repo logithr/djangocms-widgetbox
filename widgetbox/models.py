@@ -1,7 +1,7 @@
 from django.utils.encoding import python_2_unicode_compatible
 
 from django.db import models
-from .settings import GALLERY_STYLES, FAQ_STYLES
+from .settings import GALLERY_STYLES, FAQ_STYLES, DIVIDER_SIZES
 
 from cms.models import CMSPlugin
 from cms.models.fields import PageField
@@ -113,3 +113,14 @@ class Faq(CMSPlugin):
 
     def __str__(self):
         return self.question
+
+
+@python_2_unicode_compatible
+class Divider(CMSPlugin):
+    size = models.CharField(max_length=10, choices=DIVIDER_SIZES)
+
+    class Meta:
+        db_table = 'widgetbox_dividers'
+
+    def __str__(self):
+        return self.size
