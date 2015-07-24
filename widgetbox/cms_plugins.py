@@ -5,7 +5,8 @@ from .models import (
     Button, Quote,
     Gallery, GalleryImage,
     FaqTopic, Faq,
-    Divider
+    Divider,
+    HTML
 )
 
 
@@ -68,6 +69,13 @@ class DividerPlugin(CMSPluginBase):
     render_template = "widgetbox/divider.html"
 
 
+class HTMLPlugin(CMSPluginBase):
+    model = HTML
+    module = "Widget Box"
+    name = "HTML (unsafe)"
+    render_template = "widgetbox/html.html"
+
+
 plugin_pool.register_plugin(ButtonPlugin)
 plugin_pool.register_plugin(QuotePlugin)
 plugin_pool.register_plugin(GalleryPlugin)
@@ -75,3 +83,4 @@ plugin_pool.register_plugin(GalleryImagePlugin)
 plugin_pool.register_plugin(FaqTopicPlugin)
 plugin_pool.register_plugin(FaqPlugin)
 plugin_pool.register_plugin(DividerPlugin)
+plugin_pool.register_plugin(HTMLPlugin)

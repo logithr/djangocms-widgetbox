@@ -124,3 +124,15 @@ class Divider(CMSPlugin):
 
     def __str__(self):
         return self.size
+
+
+@python_2_unicode_compatible
+class HTML(CMSPlugin):
+    content = models.TextField(help_text="This is unsafe and potentially dangerous. "
+                                         "Be aware of what you are doing.")
+
+    class Meta:
+        db_table = 'widgetbox_html'
+
+    def __str__(self):
+        return self.content[:80]
