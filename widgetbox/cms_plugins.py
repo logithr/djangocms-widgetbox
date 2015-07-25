@@ -65,7 +65,7 @@ class FaqPlugin(CMSPluginBase):
 class DividerPlugin(CMSPluginBase):
     model = Divider
     module = "Widget Box"
-    name = "Vertical divider"
+    name = "Horizontal divider"
     render_template = "widgetbox/divider.html"
 
 
