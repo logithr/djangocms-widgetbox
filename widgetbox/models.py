@@ -24,9 +24,17 @@ class LinkMixin(object):
 class Button(LinkMixin, CMSPlugin):
     title = models.CharField(max_length=200)
     subtitle = models.CharField(max_length=200, blank=True)
+
     link_to_page = PageField(null=True, blank=True)
-    link_custom = models.CharField(max_length=400, blank=True)
-    icon = models.CharField(max_length=50, blank=True)
+    link_custom = models.CharField(
+        max_length=400, blank=True,
+        help_text='Overrides page link if set.')
+
+    icon = models.CharField(
+        max_length=50, blank=True,
+        help_text='Use it for Font Awesome, GLYPHICONS, or similar icons.')
+    extra_css_classes = models.CharField(max_length=200, blank=True,
+        help_text='Use it to add extra CSS classes to button.')
 
     class Meta:
         db_table = 'widgetbox_buttons'
