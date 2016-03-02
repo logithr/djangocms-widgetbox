@@ -33,7 +33,8 @@ class Button(LinkMixin, CMSPlugin):
     icon = models.CharField(
         max_length=50, blank=True,
         help_text='Use it for Font Awesome, GLYPHICONS, or similar icons.')
-    extra_css_classes = models.CharField(max_length=200, blank=True,
+    extra_css_classes = models.CharField(
+        max_length=200, blank=True,
         help_text='Use it to add extra CSS classes to button.')
 
     class Meta:
