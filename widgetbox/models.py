@@ -228,4 +228,4 @@ class ListItem(CMSPlugin):
 
     def __str__(self):
         extra = u' ({})'.format(self.extra_css_classes) if self.extra_css_classes else u''
-        return self.item_text[100:] + extra
+        return self.item_text[:100] + extra
