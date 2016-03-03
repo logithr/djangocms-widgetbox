@@ -20,3 +20,8 @@ CONTAINER_KINDS = getattr(
         ('container-fluid', 'container-fluid'),
     )
 )
+
+LIST_KINDS = (
+    ('ul', 'unordered list (<ul>)'),
+    ('ol', 'ordered list (<ol>)'),
+)

@@ -1,7 +1,10 @@
 from django.utils.encoding import python_2_unicode_compatible
 
 from django.db import models
-from .settings import GALLERY_STYLES, FAQ_STYLES, DIVIDER_SIZES, CONTAINER_KINDS
+from .settings import (
+    GALLERY_STYLES, FAQ_STYLES, DIVIDER_SIZES,
+    CONTAINER_KINDS, LIST_KINDS
+)
 
 from cms.models import CMSPlugin
 from cms.models.fields import PageField
@@ -192,3 +195,37 @@ class Container(CMSPlugin):
     def __str__(self):
         extra = u' ({})'.format(self.extra_css_classes) if self.extra_css_classes else u''
         return self.get_kind_display() + extra
+
+
+@python_2_unicode_compatible
+class List(CMSPlugin):
+    tag = models.CharField(
+        max_length=2, choices=LIST_KINDS, default=LIST_KINDS[0][0],
+        help_text='List kind, unordered (&lt;ul&gt;) or ordered (&lt;ol&gt;).')
+    extra_css_classes = models.CharField(
+        max_length=200, blank=True,
+        help_text='Use it to add extra CSS classes to list.')
+
+    class Meta:
+        db_table = 'widgetbox_lists'
+
+    def __str__(self):
+        extra = u' ({})'.format(self.extra_css_classes) if self.extra_css_classes else u''
+        return self.get_tag_display() + extra
+
+
+@python_2_unicode_compatible
+class ListItem(CMSPlugin):
+    item_text = models.CharField(
+        max_length=400, blank=True,
+        help_text='Text value for list item, use it for simple lists.')
+    extra_css_classes = models.CharField(
+        max_length=200, blank=True,
+        help_text='Use it to add extra CSS classes to list.')
+
+    class Meta:
+        db_table = 'widgetbox_list_items'
+
+    def __str__(self):
+        extra = u' ({})'.format(self.extra_css_classes) if self.extra_css_classes else u''
+        return self.item_text[100:] + extra

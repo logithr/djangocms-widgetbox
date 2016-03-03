@@ -7,7 +7,8 @@ from .models import (
     FaqTopic, Faq,
     Divider,
     HTML,
-    Row, Column, Container
+    Row, Column, Container,
+    List, ListItem
 )
 
 
@@ -101,6 +102,24 @@ class ContainerPlugin(CMSPluginBase):
     render_template = "widgetbox/container.html"
 
 
+class ListPlugin(CMSPluginBase):
+    model = List
+    module = "Widget Box"
+    name = "List"
+    allow_children = True
+    child_classes = ["ListItemPlugin"]
+    render_template = "widgetbox/list.html"
+
+
+class ListItemPlugin(CMSPluginBase):
+    model = ListItem
+    module = "Widget Box"
+    name = "List Item"
+    allow_children = True
+    parent_classes = ["ListPlugin"]
+    render_template = "widgetbox/list-item.html"
+
+
 plugin_pool.register_plugin(ButtonPlugin)
 plugin_pool.register_plugin(QuotePlugin)
 plugin_pool.register_plugin(GalleryPlugin)
@@ -112,3 +131,5 @@ plugin_pool.register_plugin(HTMLPlugin)
 plugin_pool.register_plugin(RowPlugin)
 plugin_pool.register_plugin(ColumnPlugin)
 plugin_pool.register_plugin(ContainerPlugin)
+plugin_pool.register_plugin(ListPlugin)
+plugin_pool.register_plugin(ListItemPlugin)
