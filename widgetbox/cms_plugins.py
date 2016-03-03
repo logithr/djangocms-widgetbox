@@ -10,7 +10,8 @@ from .models import (
     Divider,
     HTML,
     Row, Column, Container,
-    List, ListItem
+    List, ListItem,
+    BackgroundImage
 )
 
 
@@ -137,6 +138,14 @@ class ListItemPlugin(CMSPluginBase):
         return "widgetbox/list-item.html"
 
 
+class BackgroundImagePlugin(CMSPluginBase):
+    model = BackgroundImage
+    module = "Widget Box"
+    name = "Background Image"
+    allow_children = True
+    render_template = "widgetbox/background-image.html"
+
+
 plugin_pool.register_plugin(ButtonPlugin)
 plugin_pool.register_plugin(QuotePlugin)
 plugin_pool.register_plugin(GalleryPlugin)
@@ -150,3 +159,4 @@ plugin_pool.register_plugin(ColumnPlugin)
 plugin_pool.register_plugin(ContainerPlugin)
 plugin_pool.register_plugin(ListPlugin)
 plugin_pool.register_plugin(ListItemPlugin)
+plugin_pool.register_plugin(BackgroundImagePlugin)

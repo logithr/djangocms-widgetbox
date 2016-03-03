@@ -229,3 +229,18 @@ class ListItem(CMSPlugin):
     def __str__(self):
         extra = u' ({})'.format(self.extra_css_classes) if self.extra_css_classes else u''
         return self.item_text[:100] + extra
+
+
+@python_2_unicode_compatible
+class BackgroundImage(CMSPlugin):
+    image = FilerImageField()
+    extra_css_classes = models.CharField(
+        max_length=200, blank=True,
+        help_text='Use it to add extra CSS classes to background image.')
+
+    class Meta:
+        db_table = 'widgetbox_background_images'
+
+    def __str__(self):
+        extra = u'({})'.format(self.extra_css_classes) if self.extra_css_classes else u''
+        return extra
