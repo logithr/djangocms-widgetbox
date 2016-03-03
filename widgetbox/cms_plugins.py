@@ -1,6 +1,8 @@
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 
+import os
+
 from .models import (
     Button, Quote,
     Gallery, GalleryImage,
@@ -108,7 +110,9 @@ class ListPlugin(CMSPluginBase):
     name = "List"
     allow_children = True
     child_classes = ["ListItemPlugin"]
-    render_template = "widgetbox/list.html"
+
+    def get_render_template(self, context, instance, placeholder):
+        return instance.style or "widgetbox/list.html"
 
 
 class ListItemPlugin(CMSPluginBase):
@@ -117,7 +121,18 @@ class ListItemPlugin(CMSPluginBase):
     name = "List Item"
     allow_children = True
     parent_classes = ["ListPlugin"]
-    render_template = "widgetbox/list-item.html"
+
+    def get_render_template(self, context, instance, placeholder):
+        parent = instance.parent.get_plugin_instance()[0]
+        if parent:
+            splitted_path = parent.style.split('/')
+            dirs = splitted_path[:-1]
+            template_file = splitted_path[-1]
+            template_name, template_ext = os.path.splitext(template_file)
+            # we do not use os.path.join here because django templates
+            # always use forward slash
+            return u'/'.join(dirs) + '/' + template_name + '-item' + template_ext
+        return "widgetbox/list-item.html"
 
 
 plugin_pool.register_plugin(ButtonPlugin)
