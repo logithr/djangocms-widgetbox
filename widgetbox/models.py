@@ -3,7 +3,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.db import models
 from .settings import (
     GALLERY_STYLES, FAQ_STYLES, DIVIDER_SIZES,
-    CONTAINER_KINDS, LIST_STYLES, LIST_KINDS
+    CONTAINER_KINDS, LIST_STYLES
 )
 
 from cms.models import CMSPlugin
@@ -199,12 +199,9 @@ class Container(CMSPlugin):
 
 @python_2_unicode_compatible
 class List(CMSPlugin):
-    tag = models.CharField(
-        max_length=2, choices=LIST_KINDS, default=LIST_KINDS[0][0],
-        help_text='List kind, unordered (&lt;ul&gt;) or ordered (&lt;ol&gt;).')
     style = models.CharField(
         max_length=100, choices=LIST_STYLES, default=LIST_STYLES[0][0],
-        help_text='')
+        help_text='Choose list style (template)')
     extra_css_classes = models.CharField(
         max_length=200, blank=True,
         help_text='Use it to add extra CSS classes to list.')
@@ -214,7 +211,7 @@ class List(CMSPlugin):
 
     def __str__(self):
         extra = u' ({})'.format(self.extra_css_classes) if self.extra_css_classes else u''
-        return self.get_tag_display() + extra
+        return self.get_style_display() + extra
 
 
 @python_2_unicode_compatible

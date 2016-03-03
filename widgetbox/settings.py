@@ -23,11 +23,7 @@ CONTAINER_KINDS = getattr(
 
 LIST_STYLES = getattr(
     settings, 'WIDGETBOX_LIST_STYLES', (
-        ('widgetbox/list.html', 'default'),
+        ('widgetbox/ul.html', 'Unordered list (ul)'),
+        ('widgetbox/ol.html', 'Ordered list (ol)'),
     )
-)
-
-LIST_KINDS = (
-    ('ul', 'unordered list (<ul>)'),
-    ('ol', 'ordered list (<ol>)'),
 )

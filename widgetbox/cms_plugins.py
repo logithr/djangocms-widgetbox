@@ -129,6 +129,8 @@ class ListItemPlugin(CMSPluginBase):
             dirs = splitted_path[:-1]
             template_file = splitted_path[-1]
             template_name, template_ext = os.path.splitext(template_file)
+            if template_name in ('ul', 'ol'):
+                return "widgetbox/list-item.html"
             # we do not use os.path.join here because django templates
             # always use forward slash
             return u'/'.join(dirs) + '/' + template_name + '-item' + template_ext
