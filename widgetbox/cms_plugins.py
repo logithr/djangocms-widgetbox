@@ -6,7 +6,8 @@ from .models import (
     Gallery, GalleryImage,
     FaqTopic, Faq,
     Divider,
-    HTML
+    HTML,
+    Row, Column, Container
 )
 
 
@@ -76,6 +77,30 @@ class HTMLPlugin(CMSPluginBase):
     render_template = "widgetbox/html.html"
 
 
+class RowPlugin(CMSPluginBase):
+    model = Row
+    module = "Widget Box"
+    name = "Row"
+    allow_children = True
+    render_template = "widgetbox/row.html"
+
+
+class ColumnPlugin(CMSPluginBase):
+    model = Column
+    module = "Widget Box"
+    name = "Column"
+    allow_children = True
+    render_template = "widgetbox/column.html"
+
+
+class ContainerPlugin(CMSPluginBase):
+    model = Container
+    module = "Widget Box"
+    name = "Container"
+    allow_children = True
+    render_template = "widgetbox/container.html"
+
+
 plugin_pool.register_plugin(ButtonPlugin)
 plugin_pool.register_plugin(QuotePlugin)
 plugin_pool.register_plugin(GalleryPlugin)
@@ -84,3 +109,6 @@ plugin_pool.register_plugin(FaqTopicPlugin)
 plugin_pool.register_plugin(FaqPlugin)
 plugin_pool.register_plugin(DividerPlugin)
 plugin_pool.register_plugin(HTMLPlugin)
+plugin_pool.register_plugin(RowPlugin)
+plugin_pool.register_plugin(ColumnPlugin)
+plugin_pool.register_plugin(ContainerPlugin)

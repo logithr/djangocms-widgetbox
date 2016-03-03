@@ -1,7 +1,7 @@
 from django.utils.encoding import python_2_unicode_compatible
 
 from django.db import models
-from .settings import GALLERY_STYLES, FAQ_STYLES, DIVIDER_SIZES
+from .settings import GALLERY_STYLES, FAQ_STYLES, DIVIDER_SIZES, CONTAINER_KINDS
 
 from cms.models import CMSPlugin
 from cms.models.fields import PageField
@@ -145,3 +145,50 @@ class HTML(CMSPlugin):
 
     def __str__(self):
         return self.content[:80]
+
+
+@python_2_unicode_compatible
+class Row(CMSPlugin):
+    extra_css_classes = models.CharField(
+        max_length=200, blank=True,
+        help_text='Use it to add extra CSS classes to row.')
+
+    class Meta:
+        db_table = 'widgetbox_rows'
+
+    def __str__(self):
+        return self.extra_css_classes
+
+
+@python_2_unicode_compatible
+class Column(CMSPlugin):
+    css_classes = models.CharField(
+        max_length=200, blank=True,
+        help_text='Defines column class, eg col-md-6')
+    extra_css_classes = models.CharField(
+        max_length=200, blank=True,
+        help_text='Use it to add extra CSS classes to column.')
+
+    class Meta:
+        db_table = 'widgetbox_columns'
+
+    def __str__(self):
+        extra = u' ({})'.format(self.extra_css_classes) if self.extra_css_classes else u''
+        return self.css_classes + extra
+
+
+@python_2_unicode_compatible
+class Container(CMSPlugin):
+    kind = models.CharField(
+        max_length=20, choices=CONTAINER_KINDS, default=CONTAINER_KINDS[0][0],
+        help_text='Container kind, contained or fluid.')
+    extra_css_classes = models.CharField(
+        max_length=200, blank=True,
+        help_text='Use it to add extra CSS classes to column.')
+
+    class Meta:
+        db_table = 'widgetbox_containers'
+
+    def __str__(self):
+        extra = u' ({})'.format(self.extra_css_classes) if self.extra_css_classes else u''
+        return self.get_kind_display() + extra

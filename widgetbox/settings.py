@@ -13,3 +13,10 @@ FAQ_STYLES = getattr(
 
 DIVIDER_SIZES = getattr(
     settings, 'WIDGETBOX_DIVIDER_SIZES', ())
+
+CONTAINER_KINDS = getattr(
+    settings, 'WIDGETBOX_CONTAINER_KINDS', (
+        ('container', 'container'),
+        ('container-fluid', 'container-fluid'),
+    )
+)
