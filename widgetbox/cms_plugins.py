@@ -11,7 +11,8 @@ from .models import (
     HTML,
     Row, Column, Container,
     List, ListItem,
-    BackgroundImage
+    BackgroundImage,
+    Tab, TabPane
 )
 
 
@@ -146,6 +147,24 @@ class BackgroundImagePlugin(CMSPluginBase):
     render_template = "widgetbox/background-image.html"
 
 
+class TabPlugin(CMSPluginBase):
+    model = Tab
+    module = "Widget Box"
+    name = "Tab"
+    allow_children = True
+    child_classes = ["TabPanePlugin"]
+    render_template = "widgetbox/tab.html"
+
+
+class TabPanePlugin(CMSPluginBase):
+    model = TabPane
+    module = "Widget Box"
+    name = "Tab Pane"
+    allow_children = True
+    parent_classes = ["TabPlugin"]
+    render_template = "widgetbox/tab-pane.html"
+
+
 plugin_pool.register_plugin(ButtonPlugin)
 plugin_pool.register_plugin(QuotePlugin)
 plugin_pool.register_plugin(GalleryPlugin)
@@ -160,3 +179,5 @@ plugin_pool.register_plugin(ContainerPlugin)
 plugin_pool.register_plugin(ListPlugin)
 plugin_pool.register_plugin(ListItemPlugin)
 plugin_pool.register_plugin(BackgroundImagePlugin)
+plugin_pool.register_plugin(TabPlugin)
+plugin_pool.register_plugin(TabPanePlugin)

@@ -244,3 +244,32 @@ class BackgroundImage(CMSPlugin):
     def __str__(self):
         extra = u'({})'.format(self.extra_css_classes) if self.extra_css_classes else u''
         return extra
+
+
+@python_2_unicode_compatible
+class Tab(CMSPlugin):
+    extra_css_classes = models.CharField(
+        max_length=200, blank=True,
+        help_text='Use it to add extra CSS classes to tab.')
+
+    class Meta:
+        db_table = 'widgetbox_tabs'
+
+    def __str__(self):
+        extra = u'({})'.format(self.extra_css_classes) if self.extra_css_classes else u''
+        return extra
+
+
+@python_2_unicode_compatible
+class TabPane(CMSPlugin):
+    title = models.CharField(max_length=200)
+    tabid = models.SlugField(max_length=200, blank=True)
+
+    class Meta:
+        db_table = 'widgetbox_tab_panes'
+
+    def __str__(self):
+        return self.title
+
+    def get_tabid(self):
+        return self.tabid or str(self.pk)
