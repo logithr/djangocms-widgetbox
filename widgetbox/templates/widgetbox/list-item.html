@@ -1,5 +1,5 @@
 {% load cms_tags %}
-<li class="{{ instance.extra_css_classes }}">
+<li{% if instance.extra_css_classes %} class="{{ instance.extra_css_classes }}"{% endif %}>
     {{ instance.item_text }}
     {% for plugin in instance.child_plugin_instances %}{% render_plugin plugin %}{% endfor %}
 </li>
